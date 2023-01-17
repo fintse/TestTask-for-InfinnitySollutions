@@ -1,0 +1,21 @@
+.btn {
+    height: 32px;
+    border-radius: 8px;
+    background-color: var(--btn-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 12px;
+}
+
+.btn-gray {
+    background-color: var(--btn-gray);
+}
+
+.selector {
+    margin: 0 10px;
+}

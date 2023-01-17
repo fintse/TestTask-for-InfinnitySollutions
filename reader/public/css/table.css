@@ -1,0 +1,39 @@
+.books-table table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.books-table table thead th:nth-child(1) {
+  width: 20%;
+}
+
+.books-table table thead th:nth-child(2) {
+    width: 20%;
+}
+
+.books-table table thead th:nth-child(3) {
+    width: 20%;
+}
+
+.books-table table thead th:nth-child(4) {
+    width: 20%;
+}
+
+.books-table table thead th:nth-child(5) {
+    width: 20%;
+}
+
+.books-table table tbody tr:nth-child(even) {
+    background-color: var(--white);
+}
+
+.books-table table tbody tr:nth-child(odd) {
+    background-color: var(--table-row-odd);
+}
+
+.books-table table th,
+.books-table table td {
+  padding: 20px;
+  text-align: center;
+}
