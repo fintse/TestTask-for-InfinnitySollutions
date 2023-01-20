@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="icon" type="image/x-icon" href="public/images/faicon.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/css/layout.css">
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/table.css">
     <link rel="stylesheet" href="public/css/buttons.css">
     <link rel="stylesheet" href="public/css/colors.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <title>Читалкин</title>
 </head>
 <body>
     <header>
-        <h1 class="title flex-centre">Читалкин</h1>
+        <h1 class="title flex-center">Читалкин</h1>
     </header>
     <main>
         <section class="books-table container">
-            <div class="table-controller-wrapper flex-centre">
-                <div class="table-controller-add btn">qwe</div>
+            <div class="table-controller-wrapper flex-center">
+                <div class="table-controller-btn btn" data-status="0">Буду читать</div>
+                <div class="table-controller-btn btn" data-status="1">Читаю</div>
+                <div class="table-controller-btn btn" data-status="2">Прочитано</div>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
+                        <th>Название</th>
+                        <th class="table-author-cell">Автор<span class="table-author-reset"></span></th>
+                        <th class="table-year-cell">Год<span class="table-year-reset"></span></th>
+                        <th>Количество страниц</th>
+                        <th>Статус</th>
+                        <th>Дата начала</th>
+                        <th>Дата окончания</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Lorem, ipsum.</td>
-                        <td>Lorem, ipsum.</td>
-                        <td>Lorem, ipsum.</td>
-                        <td>Lorem, ipsum.</td>
-                        <td>Lorem, ipsum.</td>
-                    </tr>
-                </tbody>
+                <tbody id="table-body"></tbody>
             </table>
         </section>
     </main>
     <footer></footer>
+    <script src="public/js/API.js"></script>
+    <script src="public/js/functions.js"></script>
 </body>
 </html>

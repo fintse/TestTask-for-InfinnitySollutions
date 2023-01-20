@@ -5,35 +5,85 @@
 }
 
 .books-table table thead th:nth-child(1) {
-  width: 20%;
+ width: 10%;
 }
 
 .books-table table thead th:nth-child(2) {
-    width: 20%;
+ width: 20%;
 }
 
 .books-table table thead th:nth-child(3) {
-    width: 20%;
+ width: 6%;
 }
 
 .books-table table thead th:nth-child(4) {
-    width: 20%;
+ width: 25%;
 }
 
 .books-table table thead th:nth-child(5) {
-    width: 20%;
+ width: 15%;
+}
+
+.books-table table thead th:nth-child(6) {
+ width: 17%;
+}
+
+.books-table table thead th:nth-child(7) {
+  width: 17%;
 }
 
 .books-table table tbody tr:nth-child(even) {
-    background-color: var(--white);
+  background-color: var(--white);
 }
 
 .books-table table tbody tr:nth-child(odd) {
-    background-color: var(--table-row-odd);
+  background-color: var(--table-row-odd);
 }
 
 .books-table table th,
 .books-table table td {
   padding: 20px;
   text-align: center;
+}
+
+.table-controller-btn + .table-controller-btn {
+  margin-left: 15px;
+}
+
+.table-controller-btn {
+  width: 90px;
+  transition: 0.25s;
+}
+
+.table-controller-btn:hover {
+  background-color: var(--btn-primary-90);;
+  cursor: pointer;
+}
+
+.table-filtred-fild:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.table-year-cell.close span,
+.table-author-cell.close span {
+  background-image: url('/reader/public/images/close.svg');
+  width: 8px;
+  height: 8px;
+  margin-left: 3px;
+  display: -webkit-inline-box;
+}
+
+.table-book-progress-bar {
+  width: 65%;
+}
+
+.table-book-progress-pages {
+  width: 25%;
+  margin-left: 3px;
+}
+
+.table-year-reset,
+.table-author-reset {
+  cursor: pointer;
 }

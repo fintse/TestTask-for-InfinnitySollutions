@@ -1,0 +1,14 @@
+.title {
+    justify-content: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.table-controller-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -2,7 +2,14 @@
     --white: #fff;
 
     --btn-primary: #624DE3;
-    --btn-gray: #E0E0E0;
+    --btn-primary-90: rgba(98, 77, 227, 0.9);
+    --btn-green: #1F9254;
+    --btn-orange: #CD6200;
+    --btn-red: #A30D11;
+
+    --btn-green-status-opacity: #EBF9F1;
+    --btn-orange-status-opacity: #FEF2E5;
+    --btn-red-status-opacity: #FBE7E8;
 
     --table-row-odd: #F7F6FE;
 }

@@ -5,17 +5,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: fit-content;
-    color: #fff;
+    color: var(--white);
     font-size: 12px;
     font-weight: 700;
     padding: 0 12px;
 }
 
-.btn-gray {
-    background-color: var(--btn-gray);
+.btn-status {
+    border-radius: 22px;
+    font-weight: 400;
+    transition: 0.25s;
+    width: 85%;
 }
 
-.selector {
-    margin: 0 10px;
+.btn-status:hover {
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.btn-green {
+    color: var(--btn-green);
+    background-color: var(--btn-green-status-opacity);
+}
+
+.btn-orange {
+    color: var(--btn-orange);
+    background-color: var(--btn-orange-status-opacity);
+}
+
+.btn-red {
+    color: var(--btn-red);
+    background-color: var(--btn-red-status-opacity);
 }
