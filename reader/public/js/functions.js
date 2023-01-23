@@ -7,27 +7,28 @@ yearThElement = document.querySelector('.table-year-cell'),
 authorThElement = document.querySelector('.table-author-cell');
 
 const bookLabelByStatus = {
-  0: "Буду читать",
-  1: "Читаю",
-  2: "Прочитано",
+  1: "Буду читать",
+  2: "Читаю",
+  3: "Прочитано",
 }
 
 const statusStyle = {
-  0: "btn-green",
-  1: "btn-orange",
-  2: "btn-red",
+  1: "btn-green",
+  2: "btn-orange",
+  3: "btn-red",
 }
 
-document.querySelector('.table-controller-btn[data-status="0"]').addEventListener("click", bookStatusFunction);
 document.querySelector('.table-controller-btn[data-status="1"]').addEventListener("click", bookStatusFunction);
 document.querySelector('.table-controller-btn[data-status="2"]').addEventListener("click", bookStatusFunction);
+document.querySelector('.table-controller-btn[data-status="3"]').addEventListener("click", bookStatusFunction);
 
 
 document.querySelector('.table-year-reset').addEventListener("click", resetYear)
 document.querySelector('.table-author-reset').addEventListener("click", resetAuthor)
 
 function validateBookList(bookList) {
-  bookList.map(book => {if (book.status !== 2) {book.endDate = null}});
+  bookList.map(book => book.status !== 3 ? book : {book, endDate: null });
+  bookList.map(book => book.status === 1 ? book : {book, startDate: null });
   return bookList;
 }
 
@@ -36,82 +37,54 @@ function getBookById (bookId) {
 }
 
 function getAuthorById (authorId) {
-  return authors.find(author => author.id == authorId);
-}
-
-function getAuthorIdByBookId (bookId) {
-  return getBookById(bookId).authorId;
-}
-
-function getBookTitle (bookId) {
-  return getBookById(bookId).bookTitle;
+  return authors.find(author => author.id === authorId);
 }
 
 function getAutorName (bookId) {
-  let authorId = getAuthorIdByBookId(bookId)
+  let authorId = getBookById(bookId).authorId;
   return getAuthorById(authorId).name
-}
-
-function getBookYear (bookId) {
-  return getBookById(bookId).year;
-}
-
-function getBookPages (bookId) {
-  return getBookById(bookId).pages;
 }
 
 function resetYear () {
   yearThElement.classList.remove("close");
-  authorThElement.classList.remove("close");
-
   renderFilteredBookList(usersBookList);
 }
 
 function resetAuthor () {
   authorThElement.classList.remove("close");
-  yearThElement.classList.remove("close");
-
   renderFilteredBookList(usersBookList);
 }
 
-function bookYearFunction (year) {
+function selectYear (year) {
   yearThElement.classList.add("close");
   renderFilteredBookList(usersBookList, null, year, null);
 }
 
-function bookAuthorFunction (authorId) {
+function selectAuthor (authorId) {
   let authorName = getAutorName(authorId)
   authorThElement.classList.add("close");
   renderFilteredBookList(usersBookList, null, null, authorName);
 }
   
 function bookStatusFunction (event) {
-  let statusId = event.target.dataset['status'];
+  let statusId = Number(event.target.dataset['status']);
   renderFilteredBookList(usersBookList, statusId);
 }
 
 function bookStatusFilters (book, statusId)  {
-  return book.status == statusId;
+  return book.status === statusId;
 }
 
 function bookYearFilters (entry, year)  {
-  if (!year) {
-    return usersBookList;
-  } else {
-    return getBookYear(entry.bookId) == year;
-  }
+   return year === null ? true : getBookById(entry.bookId).year === year
 }
 
 function bookAuthorFilters (entry, authorName)  {
-  if (!authorName) {
-    return usersBookList;
-  } else {
-    return getAutorName(entry.bookId) == authorName;
-  }
+  return authorName === null ? true : getAutorName(entry.bookId) === authorName
 }
 
 function validateEndDate (endDate, statusId) {
-  if (statusId == 2) {
+  if (statusId === 3) {
     return endDate;
   } else {
     return '-';
@@ -119,31 +92,30 @@ function validateEndDate (endDate, statusId) {
 }
 
 function validateStartDate (startDate, statusId) {
-  if (!statusId == 0) {
-    return startDate;
-  } else {
+  if (statusId === 1) {
     return '-';
+  } else {
+    return startDate;
   }
 }
 
-function renderFilteredBookList(bookList, statusId = 1, year, authorName) {
+function renderFilteredBookList(bookList, statusId = 2, year = null, authorName =null) {
   bookList = validateBookList(bookList)
   table.innerHTML = "";
   out = "";
   if (!statusId) {
-    statusId = 1;
+    statusId = 2;
   }
   const filteredBookList = bookList.filter((entry) => bookYearFilters(entry, year)).filter((entry) => bookStatusFilters(entry, statusId)).filter((entry) => bookAuthorFilters(entry, authorName));
   for (let user of filteredBookList) {
     out += `
       <tr data-id="${user.id}">
-        <td>${getBookTitle(user.bookId)}</td>
-        <td class="table-filtred-fild" onclick="bookAuthorFunction(${(user.bookId)})">${getAutorName(user.bookId)}</td>
-        <td class="table-filtred-fild" onclick="bookYearFunction(${getBookYear(user.bookId)})">${getBookYear(user.bookId)}</td>
+        <td>${getBookById(user.bookId).bookTitle}</td>
+        <td class="table-filtred-fild" onclick="selectAuthor(${(user.bookId)})">${getAutorName(user.bookId)}</td>
+        <td class="table-filtred-fild" onclick="selectYear(${getBookById(user.bookId).year})">${getBookById(user.bookId).year}</td>
         <td>
-          <progress class="table-book-progress-bar" id="bookProgress" max="${getBookPages(user.bookId)}" value="${user.currentPage}"></progress>
-          <!-- <input type="range" name="currentPage" min="0" max="${getBookPages(user.bookId)}" step="1" value="${user.currentPage}"> -->
-          <span class="table-book-progress-pages" id="title">${user.currentPage}/${getBookPages(user.bookId)}</span>
+          <progress class="table-book-progress-bar" id="bookProgress" max="${getBookById(user.bookId).pages}" value="${user.currentPage}"></progress>
+          <span class="table-book-progress-pages" id="title">${user.currentPage}/${getBookById(user.bookId).pages}</span>
         </td>
         <td class="flex-center book-status"><div class="btn btn-status ${statusStyle[user.status]}"><span">${bookLabelByStatus[user.status]}</span></div></td>
         <td>${validateStartDate(user.startDate, user.status)}</td>
