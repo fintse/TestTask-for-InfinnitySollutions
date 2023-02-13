@@ -3,11 +3,16 @@ body {
 }
 
 .container {
-  width: 1200px;
+  width: 1600px;
   margin: auto;
 }
 
 h1 {
   font-family: 'Lobster', cursive;
   font-size: 40px;
+}
+
+.hidden {
+  opacity: 0;
+  display: none !important;
 }

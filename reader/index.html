@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/table.css">
     <link rel="stylesheet" href="public/css/buttons.css">
+    <link rel="stylesheet" href="public/css/form.css">
+    <link rel="stylesheet" href="public/css/popup.css">
     <link rel="stylesheet" href="public/css/colors.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,9 +25,87 @@
     <main>
         <section class="books-table container">
             <div class="table-controller-wrapper">
-                <div class="table-controller-btn btn" data-status=1>Буду читать</div>
-                <div class="table-controller-btn btn" data-status=2>Читаю</div>
-                <div class="table-controller-btn btn" data-status=3>Прочитано</div>
+                <div data-modal-target="#modal" class="table-controller-wrapper-add">
+                    <div class="table-controller-btn btn">Добавить</div>
+                </div>
+                <div class="modal" id="modal">
+                    <form action="#" id="myForm">
+                        <fieldset>
+                          <legend>Книга</legend>
+                          <div class="formBox input">
+                            <label for="bookTitle">Название</label
+                            ><input
+                              type="text"
+                              id="bookTitle"
+                              name="bookTitle"
+                              required
+                              autocomplete="off"
+                              autocapitalize="on"
+                            />
+                          </div>
+                          <div class="formBox input">
+                            <label for="name">Автор</label
+                            ><input
+                              type="text"
+                              id="name"
+                              name="name"
+                              required
+                              autocomplete="off"
+                              autocapitalize="on"
+                            />
+                          </div>
+                          <div class="formBox input">
+                            <label for="year">Год</label
+                            ><input
+                              type="number"
+                              id="year"
+                              name="year"
+                              required
+                              autocomplete="off"
+                              autocapitalize="on"
+                            />
+                          </div>
+                          <div class="formBox input">
+                            <label for="pages">Страниц</label
+                            ><input
+                              type="number"
+                              id="pages"
+                              name="pages"
+                              required
+                              autocomplete="off"
+                              autocapitalize="on"
+                            />
+                          </div>
+                          <div class="formBox input hidden" id="currentPage">
+                            <label for="currentPage">Прочитано страниц</label
+                            ><input
+                              type="number"
+                              id="currentPage"
+                              name="currentPage"
+                              autocomplete="off"
+                              autocapitalize="on"
+                            />
+                          </div>
+                          <div class="formBox input">
+                            <label for="status">Статус</label>
+                              <select name="status" id="status">
+                                <option value="1" selected>Буду читать</option>
+                                <option value="2">Читаю</option>
+                                <option value="3">Прочитано</option>
+                              </select>
+                          </div>
+                          <div class="formBox">
+                            <button id="btnSubmit">Отправить</button>
+                          </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="overlay"></div>
+                <div class="table-controller-wrapper-status">
+                    <div class="table-controller-btn btn" data-status=1>Буду читать</div>
+                    <div class="table-controller-btn btn" data-status=2>Читаю</div>
+                    <div class="table-controller-btn btn" data-status=3>Прочитано</div>
+                </div>
             </div>
             <table>
                 <thead>
@@ -37,6 +117,7 @@
                         <th>Статус</th>
                         <th>Дата начала</th>
                         <th>Дата окончания</th>
+                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -46,5 +127,6 @@
     <footer></footer>
     <script src="public/js/API.js"></script>
     <script src="public/js/functions.js"></script>
+    <script src="public/js/modalController.js"></script>
 </body>
 </html>

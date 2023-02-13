@@ -9,27 +9,31 @@
 }
 
 .books-table table thead th:nth-child(2) {
- width: 20%;
-}
-
-.books-table table thead th:nth-child(3) {
- width: 6%;
-}
-
-.books-table table thead th:nth-child(4) {
- width: 25%;
-}
-
-.books-table table thead th:nth-child(5) {
- width: 15%;
-}
-
-.books-table table thead th:nth-child(6) {
  width: 17%;
 }
 
+.books-table table thead th:nth-child(3) {
+ width: 4%;
+}
+
+.books-table table thead th:nth-child(4) {
+ width: 23%;
+}
+
+.books-table table thead th:nth-child(5) {
+ width: 10%;
+}
+
+.books-table table thead th:nth-child(6) {
+ width: 16%;
+}
+
 .books-table table thead th:nth-child(7) {
-  width: 17%;
+  width: 16%;
+}
+
+.books-table table thead th:nth-child(8) {
+  width: 14%;
 }
 
 .books-table table tbody tr:nth-child(even) {
@@ -42,7 +46,7 @@
 
 .books-table table th,
 .books-table table td {
-  padding: 20px;
+  padding: 16px;
   text-align: center;
 }
 
@@ -86,4 +90,9 @@
 .table-year-reset,
 .table-author-reset {
   cursor: pointer;
+}
+
+td.edit-button {
+  display: flex;
+  justify-content: center;
 }

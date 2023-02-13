@@ -1,10 +1,10 @@
 let table = document.querySelector('#table-body'),
-out = "",
-usersBookList = getUsers(),
-books = getBooks(),
-authors = getAuthors(),
-yearThElement = document.querySelector('.table-year-cell'),
-authorThElement = document.querySelector('.table-author-cell');
+    out = "",
+    // usersBookList = getUsers(),
+    // books = getBooks(),
+    // authors = getAuthors(),
+    yearThElement = document.querySelector('.table-year-cell'),
+    authorThElement = document.querySelector('.table-author-cell');
 
 const bookLabelByStatus = {
   1: "Буду читать",
@@ -26,11 +26,38 @@ document.querySelector('.table-controller-btn[data-status="3"]').addEventListene
 document.querySelector('.table-year-reset').addEventListener("click", resetYear)
 document.querySelector('.table-author-reset').addEventListener("click", resetAuthor)
 
-function validateBookList(bookList) {
-  bookList.map(book => book.status !== 3 ? book : {book, endDate: null });
-  bookList.map(book => book.status === 1 ? book : {book, startDate: null });
-  return bookList;
-}
+// localStorage.clear();
+
+ localStorage.setItem ("usersBookList", JSON.stringify(getUsers()));
+ usersBookList = JSON.parse (localStorage.getItem ("usersBookList"));
+
+ localStorage.setItem ("books", JSON.stringify(getBooks()));
+ books = JSON.parse (localStorage.getItem ("books"));
+
+ localStorage.setItem ("authors", JSON.stringify(getAuthors()));
+ authors = JSON.parse (localStorage.getItem ("authors"));
+
+ if (JSON.parse(localStorage.getItem("authors_new"))) {
+  JSON.parse(localStorage.getItem("authors_new")).forEach(author_new => {
+    authors.push(author_new);
+   })
+ }
+
+ if (JSON.parse(localStorage.getItem("books_new"))) {
+  JSON.parse(localStorage.getItem("books_new")).forEach(book_new => {
+    books.push(book_new);
+   })
+ }
+
+ if (JSON.parse(localStorage.getItem("usersBookList_new"))) {
+  JSON.parse(localStorage.getItem("usersBookList_new")).forEach(user_book => {
+    usersBookList.push(user_book);
+   })
+ }
+
+ console.log(usersBookList);
+ console.log(books);
+ console.log(authors);
 
 function getBookById (bookId) {
   return books.find(book => book.id === bookId);
@@ -100,7 +127,6 @@ function validateStartDate (startDate, statusId) {
 }
 
 function renderFilteredBookList(bookList, statusId = 2, year = null, authorName =null) {
-  bookList = validateBookList(bookList)
   table.innerHTML = "";
   out = "";
   if (!statusId) {
@@ -120,6 +146,7 @@ function renderFilteredBookList(bookList, statusId = 2, year = null, authorName 
         <td class="flex-center book-status"><div class="btn btn-status ${statusStyle[user.status]}"><span">${bookLabelByStatus[user.status]}</span></div></td>
         <td>${validateStartDate(user.startDate, user.status)}</td>
         <td>${validateEndDate(user.endDate, user.status)}</td>
+        <td><div class="btn table-controller-btn" onclick="editForm(${user.id}, ${getBookById(user.bookId).authorId})">Редактировать</div></td>
       </tr>
     `
     }
